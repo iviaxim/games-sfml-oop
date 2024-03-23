@@ -18,9 +18,9 @@ namespace snake_game
 		return snake->headPosition() == position;
 	}
 
-	bool SnakeController::snakeContains(const sf::Vector2u& position) const
+	bool SnakeController::canMove() const
 	{
-		return snake->contains(position);
+		return !snake->contains(headNextPosition());
 	}
 
 	void SnakeController::lookLeft()

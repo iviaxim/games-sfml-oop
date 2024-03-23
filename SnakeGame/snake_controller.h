@@ -14,9 +14,9 @@ namespace snake_game
 
 		bool canEat(const sf::Vector2u& position) const;
 
-		bool snakeContains(const sf::Vector2u& position) const;
-
 		void move();
+
+		bool canMove() const;
 
 		sf::Vector2u headNextPosition() const;
 

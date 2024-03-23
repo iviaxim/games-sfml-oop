@@ -3,6 +3,7 @@
 #include "rectangle_board.h"
 #include "snake.h"
 #include "snake_controller.h"
+#include "move_timer.h"
 
 namespace snake_game
 {
@@ -12,6 +13,11 @@ namespace snake_game
 		int baseSize = 3;
 		int maximumLength = 30;
 		float movesPerSecond = 2.f;
+
+		float secondsToMove() const
+		{
+			return 1.0f / movesPerSecond;
+		}
 	};
 
 	struct ScreenSettings
@@ -49,9 +55,8 @@ namespace snake_game
 		Snake theSnake;
 		SnakeController snakeController;
 		sf::Vector2u foodPosition;
-		sf::Clock clock;
-		sf::Time lastElapsedTime;
 		GameSettings settings;
+		MoveTimer moveTimer;
 	};
 
 }

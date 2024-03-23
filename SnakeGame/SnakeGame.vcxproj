@@ -86,6 +86,7 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="move_timer.cpp" />
     <ClCompile Include="rectangle_board.cpp" />
     <ClCompile Include="snake.cpp" />
     <ClCompile Include="snake_controller.cpp" />
@@ -93,6 +94,7 @@
   <ItemGroup>
     <ClInclude Include="circular_buffer.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="move_timer.h" />
     <ClInclude Include="rectangle_board.h" />
     <ClInclude Include="snake.h" />
     <ClInclude Include="snake_controller.h" />

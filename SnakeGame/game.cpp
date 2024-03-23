@@ -22,8 +22,7 @@ namespace snake_game
 
 	void Game::reset()
 	{
-		clock.restart();
-		lastElapsedTime = clock.getElapsedTime();
+		moveTimer.reset();
 
 		theSnake.init(theBoard.settings().size / 2u, settings.snake.baseSize);
 		snakeController.lookDown();
@@ -65,23 +64,21 @@ namespace snake_game
 
 	void Game::update()
 	{
-		auto elapsedTime = clock.getElapsedTime();
-		float secondsToMove = 1.0f / settings.snake.movesPerSecond;
-		bool moveIsReady = (elapsedTime.asSeconds() - lastElapsedTime.asSeconds()) > secondsToMove;
-		if (moveIsReady)
+		if (moveTimer.isReadyToMove(settings.snake.secondsToMove()))
 		{
-			auto headNextPosition = snakeController.headNextPosition();
-			if (theBoard.outOfBoard(headNextPosition)
-				|| snakeController.snakeContains(headNextPosition))
+			if (theBoard.outOfBoard(snakeController.headNextPosition()))
+			{
+				reset();
+			}
+			else if (!snakeController.canMove())
 			{
 				reset();
 			}
 			else
 			{
 				snakeController.move();
-				lastElapsedTime = elapsedTime;
+				moveTimer.reset();
 			}
-
 		}
 
 		if (snakeController.canEat(foodPosition))
