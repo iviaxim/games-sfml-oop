@@ -6,7 +6,8 @@ namespace snake_game
 	Game::Game(const GameSettings& gameSettings)
 		: theSnakePart((gameSettings.board.cellSize.x - 2) / 2.f)
 		, theFoodPart((gameSettings.board.cellSize.x - 2) / 2.f)
-		, theBoard(gameSettings.board)
+		, theBoard(gameSettings.board.size)
+		, boardView(&theBoard, gameSettings.board)
 		, theSnake(gameSettings.snake.maximumLength)
 		, snakeController(&theSnake)
 		, settings(gameSettings)
@@ -24,7 +25,7 @@ namespace snake_game
 	{
 		moveTimer.reset();
 
-		theSnake.init(theBoard.settings().size / 2u, settings.snake.baseSize);
+		theSnake.init(settings.board.size / 2u, settings.snake.baseSize);
 		snakeController.lookDown();
 
 		generateFood();
@@ -33,8 +34,8 @@ namespace snake_game
 	void Game::generateFood()
 	{
 		sf::Vector2u pos;
-		pos.x = (rand() % theBoard.settings().size.x);
-		pos.y = (rand() % theBoard.settings().size.y);
+		pos.x = (rand() % settings.board.size.x);
+		pos.y = (rand() % settings.board.size.y);
 
 		foodPosition = pos;
 	}
@@ -66,7 +67,7 @@ namespace snake_game
 	{
 		if (moveTimer.isReadyToMove(settings.snake.secondsToMove()))
 		{
-			if (theBoard.outOfBoard(snakeController.headNextPosition()))
+			if (!theBoard.contains(snakeController.headNextPosition()))
 			{
 				reset();
 			}
@@ -90,13 +91,21 @@ namespace snake_game
 
 	void Game::draw(sf::RenderWindow& window)
 	{
-		theBoard.draw(window);
+		boardView.draw(window);
+		drawFood(window);
+		drawSnake(window);
+	}
 
-		auto cellPosition = theBoard.getCellPosition(foodPosition);
+	void Game::drawFood(sf::RenderWindow& window)
+	{
+		auto cellPosition = boardView.getCellPosition(foodPosition);
 		theFoodPart.setPosition(cellPosition);
 		window.draw(theFoodPart);
+	}
 
-		cellPosition = theBoard.getCellPosition(theSnake.point(0));
+	void Game::drawSnake(sf::RenderWindow& window)
+	{
+		auto cellPosition = boardView.getCellPosition(theSnake.point(0));
 		theSnakePart.setPosition(cellPosition);
 		theSnakePart.setScale(1, 1);
 		window.draw(theSnakePart);
@@ -104,12 +113,12 @@ namespace snake_game
 		theSnakePart.setScale(0.8f, 0.8f);
 		for (int i = 0; i < theSnake.size() - 1; ++i)
 		{
-			cellPosition = theBoard.getCellPosition(theSnake.point(i));
+			cellPosition = boardView.getCellPosition(theSnake.point(i));
 			theSnakePart.setPosition(cellPosition);
 			window.draw(theSnakePart);
 		}
 
-		cellPosition = theBoard.getCellPosition(theSnake.point(theSnake.size() - 1));
+		cellPosition = boardView.getCellPosition(theSnake.point(theSnake.size() - 1));
 		theSnakePart.setScale(0.4f, 0.4f);
 		theSnakePart.setPosition(cellPosition);
 		window.draw(theSnakePart);

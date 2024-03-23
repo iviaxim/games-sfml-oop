@@ -1,6 +1,7 @@
 #pragma once
 
 #include "rectangle_board.h"
+#include "rectangle_board_view.h"
 #include "snake.h"
 #include "snake_controller.h"
 #include "move_timer.h"
@@ -49,9 +50,14 @@ namespace snake_game
 		void draw(sf::RenderWindow& window);
 
 	private:
+		void drawFood(sf::RenderWindow& window);
+		void drawSnake(sf::RenderWindow& window);
+
+	private:
 		sf::CircleShape theSnakePart;
 		sf::CircleShape theFoodPart;
 		RectangleBoard theBoard;
+		RectangleBoardView boardView;
 		Snake theSnake;
 		SnakeController snakeController;
 		sf::Vector2u foodPosition;
