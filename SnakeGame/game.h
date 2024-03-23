@@ -2,6 +2,7 @@
 
 #include "rectangle_board.h"
 #include "snake.h"
+#include "snake_controller.h"
 
 namespace snake_game
 {
@@ -46,6 +47,7 @@ namespace snake_game
 		sf::CircleShape theFoodPart;
 		RectangleBoard theBoard;
 		Snake theSnake;
+		SnakeController snakeController;
 		sf::Vector2u foodPosition;
 		sf::Clock clock;
 		sf::Time lastElapsedTime;

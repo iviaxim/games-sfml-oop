@@ -17,34 +17,9 @@ namespace snake_game
 		}
 	}
 
-	void Snake::eat(const sf::Vector2u& position)
+	void Snake::pushHead(const sf::Vector2u& position)
 	{
 		snakePoints.push(position);
-	}
-
-	void Snake::move()
-	{
-		moveTo(headPosition() + moveDirection);
-	}
-
-	void Snake::lookLeft()
-	{
-		tryChangeDirection(sf::Vector2u(-1, 0));
-	}
-
-	void Snake::lookRight()
-	{
-		tryChangeDirection(sf::Vector2u(1, 0));
-	}
-
-	void Snake::lookUp()
-	{
-		tryChangeDirection(sf::Vector2u(0, -1));
-	}
-
-	void Snake::lookDown()
-	{
-		tryChangeDirection(sf::Vector2u(0, 1));
 	}
 
 	int Snake::size() const
@@ -67,25 +42,16 @@ namespace snake_game
 		return point(0) - point(1);
 	}
 
-	bool Snake::selfEat() const
+	bool Snake::contains(const sf::Vector2u& position) const
 	{
-		auto headPos = headPosition();
-		for (int i = 1; i < size(); ++i)
+		for (int i = 0; i < size(); ++i)
 		{
-			if (headPos == point(i))
+			if (position == point(i))
 			{
 				return true;
 			}
 		}
 		return false;
-	}
-
-	void Snake::tryChangeDirection(const sf::Vector2u& value)
-	{
-		if (value + headDirection() != sf::Vector2u(0, 0))
-		{
-			moveDirection = value;
-		}
 	}
 
 	void Snake::moveTo(const sf::Vector2u& position)

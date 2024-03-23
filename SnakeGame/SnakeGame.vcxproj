@@ -88,12 +88,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="rectangle_board.cpp" />
     <ClCompile Include="snake.cpp" />
+    <ClCompile Include="snake_controller.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ciclic_buffer.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="rectangle_board.h" />
     <ClInclude Include="snake.h" />
+    <ClInclude Include="snake_controller.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

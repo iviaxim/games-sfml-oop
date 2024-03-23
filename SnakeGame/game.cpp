@@ -8,6 +8,7 @@ namespace snake_game
 		, theFoodPart((gameSettings.board.cellSize.x - 2) / 2.f)
 		, theBoard(gameSettings.board)
 		, theSnake(gameSettings.snake.maximumLength)
+		, snakeController(&theSnake)
 		, settings(gameSettings)
 	{
 		theSnakePart.setOrigin(settings.board.cellSize.x / 2.f, settings.board.cellSize.y / 2.f);
@@ -25,7 +26,7 @@ namespace snake_game
 		lastElapsedTime = clock.getElapsedTime();
 
 		theSnake.init(theBoard.settings().size / 2u, settings.snake.baseSize);
-		theSnake.lookDown();
+		snakeController.lookDown();
 
 		generateFood();
 	}
@@ -45,19 +46,19 @@ namespace snake_game
 		{
 			if (event.key.code == sf::Keyboard::Left)
 			{
-				theSnake.lookLeft();
+				snakeController.lookLeft();
 			}
 			else if (event.key.code == sf::Keyboard::Right)
 			{
-				theSnake.lookRight();
+				snakeController.lookRight();
 			}
 			else if (event.key.code == sf::Keyboard::Up)
 			{
-				theSnake.lookUp();
+				snakeController.lookUp();
 			}
 			else if (event.key.code == sf::Keyboard::Down)
 			{
-				theSnake.lookDown();
+				snakeController.lookDown();
 			}
 		}
 	}
@@ -69,19 +70,23 @@ namespace snake_game
 		bool moveIsReady = (elapsedTime.asSeconds() - lastElapsedTime.asSeconds()) > secondsToMove;
 		if (moveIsReady)
 		{
-			theSnake.move();
-			lastElapsedTime = elapsedTime;
-
-			if (theBoard.outOfBoard(theSnake.headPosition())
-				|| theSnake.selfEat())
+			auto headNextPosition = snakeController.headNextPosition();
+			if (theBoard.outOfBoard(headNextPosition)
+				|| snakeController.snakeContains(headNextPosition))
 			{
 				reset();
 			}
+			else
+			{
+				snakeController.move();
+				lastElapsedTime = elapsedTime;
+			}
+
 		}
 
-		if (theSnake.headPosition() == foodPosition)
+		if (snakeController.canEat(foodPosition))
 		{
-			theSnake.eat(foodPosition);
+			snakeController.eat(foodPosition);
 			generateFood();
 		}
 	}

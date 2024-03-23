@@ -14,17 +14,9 @@ namespace snake_game
 
 		void init(const sf::Vector2u& position, int size);
 
-		void eat(const sf::Vector2u& position);
+		void pushHead(const sf::Vector2u& position);
 
-		void move();
-
-		void lookLeft();
-
-		void lookRight();
-
-		void lookUp();
-
-		void lookDown();
+		void moveTo(const sf::Vector2u& position);
 
 		int size() const;
 
@@ -34,15 +26,9 @@ namespace snake_game
 
 		sf::Vector2u headDirection() const;
 
-		bool selfEat() const;
-
-	protected:
-		void tryChangeDirection(const sf::Vector2u& value);
-
-		void moveTo(const sf::Vector2u& position);
+		bool contains(const sf::Vector2u& position) const;
 
 	private:
-		sf::Vector2u moveDirection;
 		utils::CiclicBuffer<sf::Vector2u> snakePoints;
 	};
 
