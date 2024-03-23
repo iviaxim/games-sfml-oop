@@ -4,17 +4,15 @@ namespace snake_game
 {
 
 	Game::Game(const GameSettings& gameSettings)
-		: theFoodPart((gameSettings.board.cellSize.x - 2) / 2.f)
-		, theBoard(gameSettings.board.size)
+		: theBoard(gameSettings.board.size)
 		, boardView(&theBoard, gameSettings.board)
 		, theSnake(gameSettings.snake.maximumLength)
 		, snakeView(&theSnake, &boardView)
 		, snakeController(&theSnake)
+		, food(sf::Vector2u(0, 0))
+		, foodView(&food, &boardView)
 		, settings(gameSettings)
 	{
-		theFoodPart.setOrigin(settings.board.cellSize.x / 2.f, settings.board.cellSize.y / 2.f);
-		theFoodPart.setFillColor(sf::Color::Yellow);
-
 		reset();
 	}
 
@@ -34,7 +32,7 @@ namespace snake_game
 		pos.x = (rand() % settings.board.size.x);
 		pos.y = (rand() % settings.board.size.y);
 
-		foodPosition = pos;
+		food = Food(pos);
 	}
 
 	void Game::handleEvent(const sf::Event& event)
@@ -79,9 +77,9 @@ namespace snake_game
 			}
 		}
 
-		if (snakeController.canEat(foodPosition))
+		if (snakeController.canEat(food.position()))
 		{
-			snakeController.eat(foodPosition);
+			snakeController.eat(food.position());
 			generateFood();
 		}
 	}
@@ -89,15 +87,8 @@ namespace snake_game
 	void Game::draw(sf::RenderWindow& window)
 	{
 		boardView.draw(window);
+		foodView.draw(window);
 		snakeView.draw(window);
-		drawFood(window);
-	}
-
-	void Game::drawFood(sf::RenderWindow& window)
-	{
-		auto cellPosition = boardView.getCellPosition(foodPosition);
-		theFoodPart.setPosition(cellPosition);
-		window.draw(theFoodPart);
 	}
 
 }

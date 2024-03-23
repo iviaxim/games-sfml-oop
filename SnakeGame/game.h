@@ -5,6 +5,8 @@
 #include "snake.h"
 #include "snake_view.h"
 #include "snake_controller.h"
+#include "food.h"
+#include "food_view.h"
 #include "move_timer.h"
 
 namespace snake_game
@@ -51,16 +53,16 @@ namespace snake_game
 		void draw(sf::RenderWindow& window);
 
 	private:
-		void drawFood(sf::RenderWindow& window);
-
-	private:
-		sf::CircleShape theFoodPart;
 		RectangleBoard theBoard;
 		RectangleBoardView boardView;
+
 		Snake theSnake;
 		SnakeView snakeView;
 		SnakeController snakeController;
-		sf::Vector2u foodPosition;
+
+		Food food;
+		FoodView foodView;
+
 		GameSettings settings;
 		MoveTimer moveTimer;
 	};

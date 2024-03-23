@@ -84,6 +84,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="food.cpp" />
+    <ClCompile Include="food_view.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="move_timer.cpp" />
@@ -95,6 +97,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circular_buffer.h" />
+    <ClInclude Include="food.h" />
+    <ClInclude Include="food_view.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="move_timer.h" />
     <ClInclude Include="rectangle_board.h" />
