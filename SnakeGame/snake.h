@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ciclic_buffer.h"
+#include "circular_buffer.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -29,7 +29,7 @@ namespace snake_game
 		bool contains(const sf::Vector2u& position) const;
 
 	private:
-		utils::CiclicBuffer<sf::Vector2u> snakePoints;
+		utils::CircularBuffer<sf::Vector2u> snakePoints;
 	};
 
 }
