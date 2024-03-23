@@ -49,4 +49,9 @@ namespace snake_game
 		return boardSettings;
 	}
 
+	sf::Vector2f RectangleBoardView::cellSize() const
+	{
+		return boardSettings.cellSize;
+	}
+
 }

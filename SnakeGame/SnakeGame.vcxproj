@@ -91,6 +91,7 @@
     <ClCompile Include="rectangle_board_view.cpp" />
     <ClCompile Include="snake.cpp" />
     <ClCompile Include="snake_controller.cpp" />
+    <ClCompile Include="snake_view.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circular_buffer.h" />
@@ -100,6 +101,7 @@
     <ClInclude Include="rectangle_board_view.h" />
     <ClInclude Include="snake.h" />
     <ClInclude Include="snake_controller.h" />
+    <ClInclude Include="snake_view.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

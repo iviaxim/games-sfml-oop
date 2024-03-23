@@ -3,6 +3,7 @@
 #include "rectangle_board.h"
 #include "rectangle_board_view.h"
 #include "snake.h"
+#include "snake_view.h"
 #include "snake_controller.h"
 #include "move_timer.h"
 
@@ -51,14 +52,13 @@ namespace snake_game
 
 	private:
 		void drawFood(sf::RenderWindow& window);
-		void drawSnake(sf::RenderWindow& window);
 
 	private:
-		sf::CircleShape theSnakePart;
 		sf::CircleShape theFoodPart;
 		RectangleBoard theBoard;
 		RectangleBoardView boardView;
 		Snake theSnake;
+		SnakeView snakeView;
 		SnakeController snakeController;
 		sf::Vector2u foodPosition;
 		GameSettings settings;

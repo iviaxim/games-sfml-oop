@@ -26,6 +26,8 @@ namespace snake_game
 
 		BoardSettings settings() const;
 
+		sf::Vector2f cellSize() const;
+
 	private:
 		sf::Vector2f leftTopCorner() const;
 
