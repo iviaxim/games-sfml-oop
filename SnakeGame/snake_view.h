@@ -21,14 +21,13 @@ namespace snake_game
 	class SnakeView
 	{
 	public:
-		SnakeView(Snake* snake, RectangleBoardView* board);
+		SnakeView(RectangleBoardView* board);
 
 		void setupView(const SnakeViewSettings& settings);
 
-		void draw(sf::RenderWindow& window);
+		void draw(sf::RenderWindow& window, const Snake &snake);
 
 	private:
-		Snake* snake;
 		RectangleBoardView* board;
 		sf::CircleShape circleView;
 		SnakeViewSettings settings;

@@ -18,14 +18,13 @@ namespace snake_game
 	class FoodView
 	{
 	public:
-		FoodView(Food* food, RectangleBoardView* board);
+		FoodView(RectangleBoardView* board);
 
 		void setupView(const FoodViewSettings &settings);
 
-		void draw(sf::RenderWindow& window);
+		void draw(sf::RenderWindow& window, const Food& food);
 
 	private:
-		Food* food;
 		RectangleBoardView* board;
 		sf::CircleShape circleView;
 	};

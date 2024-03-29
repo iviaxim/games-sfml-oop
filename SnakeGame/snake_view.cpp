@@ -14,9 +14,8 @@ namespace snake_game
 		return result;
 	}
 
-	SnakeView::SnakeView(Snake* snake_, RectangleBoardView* board_)
-		: snake(snake_)
-		, board(board_)
+	SnakeView::SnakeView(RectangleBoardView* board_)
+		: board(board_)
 	{
 		auto viewSettings = SnakeViewSettings::fromRect(board->cellSize(), CellPadding, sf::Color::Green);
 		viewSettings.scaleHead = 1.0f;
@@ -33,22 +32,22 @@ namespace snake_game
 		circleView.setFillColor(settings.color);
 	}
 
-	void SnakeView::draw(sf::RenderWindow& window)
+	void SnakeView::draw(sf::RenderWindow& window, const Snake& snake)
 	{
-		auto cellPosition = board->cellCenter(snake->point(0));
+		auto cellPosition = board->cellCenter(snake.point(0));
 		circleView.setPosition(cellPosition);
 		circleView.setScale(settings.scaleHead, settings.scaleHead);
 		window.draw(circleView);
 
 		circleView.setScale(settings.scaleBody, settings.scaleBody);
-		for (int i = 0; i < snake->size() - 1; ++i)
+		for (int i = 0; i < snake.size() - 1; ++i)
 		{
-			cellPosition = board->cellCenter(snake->point(i));
+			cellPosition = board->cellCenter(snake.point(i));
 			circleView.setPosition(cellPosition);
 			window.draw(circleView);
 		}
 
-		cellPosition = board->cellCenter(snake->point(snake->size() - 1));
+		cellPosition = board->cellCenter(snake.point(snake.size() - 1));
 		circleView.setScale(settings.scaleTail, settings.scaleTail);
 		circleView.setPosition(cellPosition);
 		window.draw(circleView);

@@ -53,10 +53,10 @@ namespace snake_game
 		void draw(sf::RenderWindow& window);
 
 	private:
-		RectangleBoard theBoard;
+		RectangleBoard board;
 		RectangleBoardView boardView;
 
-		Snake theSnake;
+		Snake snake;
 		SnakeView snakeView;
 		SnakeController snakeController;
 

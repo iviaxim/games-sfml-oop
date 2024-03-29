@@ -13,9 +13,8 @@ namespace snake_game
 		return cellSize / 2.f;
 	}
 
-	RectangleBoardView::RectangleBoardView(RectangleBoard* board_, const RectangleBoardViewSettings& settings)
+	RectangleBoardView::RectangleBoardView(const RectangleBoardViewSettings& settings)
 		: boardSettings(settings)
-		, board(board_)
 	{
 		theCell.setFillColor(boardSettings.cellBackColor);
 		theCell.setSize(boardSettings.cellSize - sf::Vector2f(2, 2));

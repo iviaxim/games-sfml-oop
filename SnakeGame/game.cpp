@@ -4,13 +4,13 @@ namespace snake_game
 {
 
 	Game::Game(const GameSettings& gameSettings)
-		: theBoard(gameSettings.board.size)
-		, boardView(&theBoard, gameSettings.board)
-		, theSnake(gameSettings.snake.maximumLength)
-		, snakeView(&theSnake, &boardView)
-		, snakeController(&theSnake)
+		: board(gameSettings.board.size)
+		, boardView(gameSettings.board)
+		, snake(gameSettings.snake.maximumLength)
+		, snakeView(&boardView)
+		, snakeController(&snake)
 		, food(sf::Vector2u(0, 0))
-		, foodView(&food, &boardView)
+		, foodView(&boardView)
 		, settings(gameSettings)
 	{
 		reset();
@@ -20,7 +20,7 @@ namespace snake_game
 	{
 		moveTimer.reset();
 
-		theSnake.init(settings.board.size / 2u, settings.snake.baseSize);
+		snake.init(settings.board.size / 2u, settings.snake.baseSize);
 		snakeController.lookDown();
 
 		generateFood();
@@ -62,7 +62,7 @@ namespace snake_game
 	{
 		if (moveTimer.isReadyToMove(settings.snake.secondsToMove()))
 		{
-			if (!theBoard.contains(snakeController.headNextPosition()))
+			if (!board.contains(snakeController.headNextPosition()))
 			{
 				reset();
 			}
@@ -87,8 +87,8 @@ namespace snake_game
 	void Game::draw(sf::RenderWindow& window)
 	{
 		boardView.draw(window);
-		foodView.draw(window);
-		snakeView.draw(window);
+		foodView.draw(window, food);
+		snakeView.draw(window, snake);
 	}
 
 }

@@ -20,7 +20,7 @@ namespace snake_game
 	class RectangleBoardView
 	{
 	public:
-		RectangleBoardView(RectangleBoard* board, const RectangleBoardViewSettings& settings);
+		RectangleBoardView(const RectangleBoardViewSettings& settings);
 
 		void draw(sf::RenderWindow& window);
 
@@ -35,7 +35,6 @@ namespace snake_game
 
 	private:
 		RectangleBoardViewSettings boardSettings;
-		RectangleBoard* board;
 		sf::RectangleShape theCell;
 	};
 

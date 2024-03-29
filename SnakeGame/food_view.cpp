@@ -12,9 +12,8 @@ namespace snake_game
 		return result;
 	}
 
-	FoodView::FoodView(Food* food_, RectangleBoardView* board_)
-		: food(food_)
-		, board(board_)
+	FoodView::FoodView(RectangleBoardView* board_)
+		: board(board_)
 	{
 		setupView(FoodViewSettings::fromRect(board->cellSize(), 1.f, sf::Color::Yellow));
 	}
@@ -26,9 +25,9 @@ namespace snake_game
 		circleView.setFillColor(settings.color);
 	}
 
-	void FoodView::draw(sf::RenderWindow& window)
+	void FoodView::draw(sf::RenderWindow& window, const Food& food)
 	{
-		auto cellPosition = board->cellCenter(food->position());
+		auto cellPosition = board->cellCenter(food.position());
 		circleView.setPosition(cellPosition);
 		window.draw(circleView);
 	}
