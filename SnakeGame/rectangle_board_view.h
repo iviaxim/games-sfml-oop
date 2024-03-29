@@ -7,32 +7,34 @@
 namespace snake_game
 {
 
-	struct BoardSettings
+	struct RectangleBoardViewSettings
 	{
 		sf::Vector2f center;
 		sf::Vector2u size;
 		sf::Vector2f cellSize;
 		sf::Color cellBackColor;
+
+		sf::Vector2f cellCenter() const;
 	};
 
 	class RectangleBoardView
 	{
 	public:
-		RectangleBoardView(RectangleBoard* board, const BoardSettings& settings);
+		RectangleBoardView(RectangleBoard* board, const RectangleBoardViewSettings& settings);
 
 		void draw(sf::RenderWindow& window);
 
-		sf::Vector2f getCellPosition(const sf::Vector2u& cellIndex) const;
+		RectangleBoardViewSettings settings() const;
 
-		BoardSettings settings() const;
+		sf::Vector2f cellCenter(const sf::Vector2u& cellIndex) const;
 
 		sf::Vector2f cellSize() const;
 
 	private:
-		sf::Vector2f leftTopCorner() const;
+		sf::Vector2f leftTopCellCenter() const;
 
 	private:
-		BoardSettings boardSettings;
+		RectangleBoardViewSettings boardSettings;
 		RectangleBoard* board;
 		sf::RectangleShape theCell;
 	};

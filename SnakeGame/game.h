@@ -32,7 +32,7 @@ namespace snake_game
 
 	struct GameSettings
 	{
-		BoardSettings board;
+		RectangleBoardViewSettings board;
 		SnakeSettings snake;
 		ScreenSettings screen;
 	};
