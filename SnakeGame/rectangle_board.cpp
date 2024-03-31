@@ -14,4 +14,14 @@ namespace snake_game
 			&& (cellIndex.y < boardSize.y);
 	}
 
+	sf::Vector2u RectangleBoard::size() const
+	{
+		return boardSize;
+	}
+
+	sf::Vector2u RectangleBoard::randomCellIndex() const
+	{
+		return { rand() % boardSize.x, rand() % boardSize.y };
+	}
+
 }

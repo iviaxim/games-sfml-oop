@@ -14,6 +14,7 @@ int main()
 	gameSettings.board.size.y = 25;
 	gameSettings.board.cellSize.x = 20;
 	gameSettings.board.cellSize.y = 20;
+	gameSettings.board.cellPadding = 1.f;
 	gameSettings.board.center.x = gameSettings.screen.width / 2.f;
 	gameSettings.board.center.y = gameSettings.screen.height / 2.f;
 	gameSettings.board.cellBackColor = sf::Color(100, 100, 100);

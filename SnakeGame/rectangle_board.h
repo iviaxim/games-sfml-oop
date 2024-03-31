@@ -12,6 +12,10 @@ namespace snake_game
 
 		bool contains(const sf::Vector2u& cellIndex) const;
 
+		sf::Vector2u size() const;
+
+		sf::Vector2u randomCellIndex() const;
+
 	private:
 		sf::Vector2u boardSize;
 	};

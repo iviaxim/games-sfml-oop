@@ -17,13 +17,13 @@ namespace snake_game
 		: boardSettings(settings)
 	{
 		cell.setFillColor(boardSettings.cellBackColor);
-		cell.setSize(boardSettings.cellSize - sf::Vector2f(2, 2));
+		cell.setSize(boardSettings.cellSize - sf::Vector2f(boardSettings.cellPadding, boardSettings.cellPadding) * 2.f);
 		cell.setOrigin(boardSettings.cellCenter());
 	}
 
 	sf::Vector2f RectangleBoardView::leftTopCellCenter() const
 	{
-		return boardSettings.center 
+		return boardSettings.center
 			- multiply(boardSettings.cellSize, boardSettings.size) / 2.f
 			+ boardSettings.cellCenter();
 	}
@@ -47,11 +47,6 @@ namespace snake_game
 	sf::Vector2f RectangleBoardView::cellCenter(const sf::Vector2u& cellIndex) const
 	{
 		return leftTopCellCenter() + multiply(boardSettings.cellSize, cellIndex);
-	}
-
-	sf::Vector2f RectangleBoardView::cellSize() const
-	{
-		return boardSettings.cellSize;
 	}
 
 }

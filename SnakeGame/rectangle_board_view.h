@@ -12,6 +12,7 @@ namespace snake_game
 		sf::Vector2f center;
 		sf::Vector2u size;
 		sf::Vector2f cellSize;
+		float cellPadding;
 		sf::Color cellBackColor;
 
 		sf::Vector2f cellCenter() const;
@@ -25,8 +26,6 @@ namespace snake_game
 		void draw(sf::RenderWindow& window);
 
 		sf::Vector2f cellCenter(const sf::Vector2u& cellIndex) const;
-
-		sf::Vector2f cellSize() const;
 
 	private:
 		sf::Vector2f leftTopCellCenter() const;

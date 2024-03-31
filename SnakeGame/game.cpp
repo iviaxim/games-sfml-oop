@@ -7,12 +7,12 @@ namespace snake_game
 		: board(gameSettings.board.size)
 		, boardView(gameSettings.board)
 		, snake(gameSettings.snake.maximumLength)
-		, snakeView(&boardView)
 		, snakeController(&snake)
 		, food(sf::Vector2u(0, 0))
-		, foodView(&boardView)
 		, settings(gameSettings)
+		, moveTimer(settings.snake.secondsToMove())
 	{
+		setupView(gameSettings);
 		reset();
 	}
 
@@ -23,16 +23,28 @@ namespace snake_game
 		snake.init(settings.board.size / 2u, settings.snake.baseSize);
 		snakeController.lookDown();
 
-		generateFood();
+		food = Food(board.randomCellIndex());
 	}
 
-	void Game::generateFood()
+	void Game::setupView(const GameSettings& gameSettings)
 	{
-		sf::Vector2u pos;
-		pos.x = (rand() % settings.board.size.x);
-		pos.y = (rand() % settings.board.size.y);
+		auto boardCellSize = gameSettings.board.cellSize;
+		auto boardCellPadding = gameSettings.board.cellPadding;
 
-		food = Food(pos);
+		SnakeViewSettings snakeViewSettings;
+		snakeViewSettings.radius = boardCellSize.x / 2.0f - boardCellPadding;
+		snakeViewSettings.origin = boardCellSize / 2.0f;
+		snakeViewSettings.color = sf::Color::Green;
+		snakeViewSettings.scaleHead = 1.0f;
+		snakeViewSettings.scaleBody = 0.8f;
+		snakeViewSettings.scaleTail = 0.4f;
+		snakeView.setupView(snakeViewSettings);
+
+		FoodViewSettings foodViewSettings;
+		foodViewSettings.radius = boardCellSize.x / 2.0f - boardCellPadding;
+		foodViewSettings.origin = boardCellSize / 2.0f;
+		foodViewSettings.color = sf::Color::Yellow;
+		foodView.setupView(foodViewSettings);
 	}
 
 	void Game::handleEvent(const sf::Event& event)
@@ -60,7 +72,7 @@ namespace snake_game
 
 	void Game::update()
 	{
-		if (moveTimer.isReadyToMove(settings.snake.secondsToMove()))
+		if (moveTimer.isReadyToMove())
 		{
 			if (!board.contains(snakeController.headNextPosition()))
 			{
@@ -80,7 +92,7 @@ namespace snake_game
 		if (snakeController.canEat(food.position()))
 		{
 			snakeController.eat(food.position());
-			generateFood();
+			food = Food(board.randomCellIndex());
 		}
 	}
 

@@ -44,7 +44,7 @@ namespace snake_game
 
 		void reset();
 
-		void generateFood();
+		void setupView(const GameSettings& gameSettings);
 
 		void handleEvent(const sf::Event& event);
 
