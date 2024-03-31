@@ -87,8 +87,8 @@ namespace snake_game
 	void Game::draw(sf::RenderWindow& window)
 	{
 		boardView.draw(window);
-		foodView.draw(window, food);
-		snakeView.draw(window, snake);
+		foodView.draw(window, food, boardView);
+		snakeView.draw(window, snake, boardView);
 	}
 
 }

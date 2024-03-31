@@ -22,7 +22,7 @@ namespace snake_game
 
 		void setupView(const FoodViewSettings &settings);
 
-		void draw(sf::RenderWindow& window, const Food& food);
+		void draw(sf::RenderWindow& window, const Food& food, const RectangleBoardView& board);
 
 	private:
 		RectangleBoardView* board;

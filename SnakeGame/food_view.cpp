@@ -25,9 +25,9 @@ namespace snake_game
 		circleView.setFillColor(settings.color);
 	}
 
-	void FoodView::draw(sf::RenderWindow& window, const Food& food)
+	void FoodView::draw(sf::RenderWindow& window, const Food& food, const RectangleBoardView& board)
 	{
-		auto cellPosition = board->cellCenter(food.position());
+		auto cellPosition = board.cellCenter(food.position());
 		circleView.setPosition(cellPosition);
 		window.draw(circleView);
 	}

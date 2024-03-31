@@ -24,8 +24,6 @@ namespace snake_game
 
 		void draw(sf::RenderWindow& window);
 
-		RectangleBoardViewSettings settings() const;
-
 		sf::Vector2f cellCenter(const sf::Vector2u& cellIndex) const;
 
 		sf::Vector2f cellSize() const;
@@ -35,7 +33,7 @@ namespace snake_game
 
 	private:
 		RectangleBoardViewSettings boardSettings;
-		sf::RectangleShape theCell;
+		sf::RectangleShape cell;
 	};
 
 }

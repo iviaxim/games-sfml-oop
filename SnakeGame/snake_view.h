@@ -25,7 +25,7 @@ namespace snake_game
 
 		void setupView(const SnakeViewSettings& settings);
 
-		void draw(sf::RenderWindow& window, const Snake &snake);
+		void draw(sf::RenderWindow& window, const Snake &snake, const RectangleBoardView& board);
 
 	private:
 		RectangleBoardView* board;
