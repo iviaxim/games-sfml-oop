@@ -28,21 +28,18 @@ namespace snake_game
 
 	void Game::setupView(const GameSettings& gameSettings)
 	{
-		auto boardCellSize = gameSettings.board.cellSize;
-		auto boardCellPadding = gameSettings.board.cellPadding;
-
 		SnakeViewSettings snakeViewSettings;
-		snakeViewSettings.radius = boardCellSize.x / 2.0f - boardCellPadding;
-		snakeViewSettings.origin = boardCellSize / 2.0f;
+		snakeViewSettings.radius = gameSettings.board.radius();
+		snakeViewSettings.origin = gameSettings.board.cellCenter();
 		snakeViewSettings.color = sf::Color::Green;
-		snakeViewSettings.scaleHead = 1.0f;
-		snakeViewSettings.scaleBody = 0.8f;
-		snakeViewSettings.scaleTail = 0.4f;
+		snakeViewSettings.scaleHead = 2.0f;
+		snakeViewSettings.scaleBody = 1.5f;
+		snakeViewSettings.scaleTail = 0.8f;
 		snakeView.setupView(snakeViewSettings);
 
 		FoodViewSettings foodViewSettings;
-		foodViewSettings.radius = boardCellSize.x / 2.0f - boardCellPadding;
-		foodViewSettings.origin = boardCellSize / 2.0f;
+		foodViewSettings.radius = gameSettings.board.radius();
+		foodViewSettings.origin = gameSettings.board.cellCenter();
 		foodViewSettings.color = sf::Color::Yellow;
 		foodView.setupView(foodViewSettings);
 	}

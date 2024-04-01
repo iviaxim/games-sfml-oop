@@ -16,6 +16,10 @@ namespace snake_game
 		sf::Color cellBackColor;
 
 		sf::Vector2f cellCenter() const;
+
+		float radius() const;
+
+		sf::Vector2f cellContentSize() const;
 	};
 
 	class RectangleBoardView

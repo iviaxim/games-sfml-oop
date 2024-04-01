@@ -13,11 +13,22 @@ namespace snake_game
 		return cellSize / 2.f;
 	}
 
+	float RectangleBoardViewSettings::radius() const
+	{
+		auto halfContentSize = cellContentSize() / 2.f;
+		return std::min(halfContentSize.x, halfContentSize.y);
+	}
+
+	sf::Vector2f RectangleBoardViewSettings::cellContentSize() const
+	{
+		return cellSize - sf::Vector2f(cellPadding, cellPadding) * 2.f;
+	}
+
 	RectangleBoardView::RectangleBoardView(const RectangleBoardViewSettings& settings)
 		: boardSettings(settings)
 	{
 		cell.setFillColor(boardSettings.cellBackColor);
-		cell.setSize(boardSettings.cellSize - sf::Vector2f(boardSettings.cellPadding, boardSettings.cellPadding) * 2.f);
+		cell.setSize(boardSettings.cellContentSize());
 		cell.setOrigin(boardSettings.cellCenter());
 	}
 
